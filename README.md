@@ -14,10 +14,10 @@ determine the velocity of the shot. The ball will eventually stop rolling and
 then the player will take another shot until the ball goes in the hole. 
 
 ## Functionality and MVP Features
-- [] Ability to place golf ball on first click and to hit golf ball on second click
-- [] Acceleration and slow down of golf ball
-- [] Layout of one single hole
-- [] Additional holes
+- [x] Ability to place golf ball on first click and to hit golf ball on second click
+- [x] Acceleration and slow down of golf ball
+- [x] Layout of one single hole
+- [x] Additional holes
 
 ## Architecture and Technologies
 * Javascript will be used for the game logic
