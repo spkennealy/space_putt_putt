@@ -9,7 +9,6 @@ class Game {
         
         this.start();
         this.getClickPostion = this.getClickPostion.bind(this);
-        // this.holdBall = this.holdBall.bind(this);
         this.startHole = this.startHole.bind(this);
     }
 

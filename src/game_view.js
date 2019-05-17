@@ -4,22 +4,15 @@ class GameView {
     constructor(ctx, canvas) {
         this.ctx = ctx;
         this.canvas = canvas;
-        
-        this.animate = this.animate.bind(this);
-
-        this.start();
+        this.game = new Game(ctx, canvas);
+        // this.animate = this.animate.bind(this);
     }
 
-    start() {
-        this.animate(this.ctx);
-        this.startHole();
-    }
-
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.golfBall.draw(this.ctx);
-        requestAnimationFrame(this.animate);
-    }
+    // animate() {
+    //     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    //     this.game.animate();
+    //     requestAnimationFrame(this.animate);
+    // }
 }
 
 export default GameView;

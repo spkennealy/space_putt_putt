@@ -27,7 +27,6 @@ class GolfBall {
     }
 
     holdBall(e) {
-        // e.preventDefault();
         this.pos[0] = e.clientX - this.canvas.offsetLeft - 20;
         this.pos[1] = e.clientY - this.canvas.offsetTop - 20;
     }
