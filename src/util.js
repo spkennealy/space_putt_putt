@@ -1,10 +1,22 @@
 export const Util = {
-    distance: (pos1, pos2) => {
-        const [x1, y1] = pos1;
-        const [x2, y2] = pos2;
+
+    calcDistance: (puterPos, ballPos) => {
+        const [xPutter, yPutter] = puterPos;
+        const [xBall, yBall] = ballPos;
 
         return Math.sqrt(
-            Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)
+            Math.pow(xPutter - xBall, 2) + Math.pow(yPutter - yBall, 2)
         );
     },
+
+    calcVelocity: (putterPos, ballPos) => {
+        const xVel = (putterPos[0] - ballPos[0]) / 13;
+        const yVel = (putterPos[1] - ballPos[1]) / 13;
+        return [-xVel, -yVel];
+    },
+
+    // calcAngle: (puterPos, ballPos, vel) => {
+
+    // }
+
 };

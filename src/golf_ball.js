@@ -1,4 +1,4 @@
-// import MovingObject from './moving_object';
+import * as Util from './util';
 
 class GolfBall {
     constructor(options) {
@@ -6,12 +6,13 @@ class GolfBall {
         this.vel = options.vel;
         this.radius = options.radius;
         this.canvas = options.canvas;
+        this.isMoving = false;
 
         // this.golfBall = new Image();
         // this.golfBall.src = './images/golf_ball_sprite.png';
         this.holdBall = this.holdBall.bind(this);
-        this.hit = this.hit.bind(this);
         this.draw = this.draw.bind(this);
+        this.wallCollision = this.wallCollision.bind(this);
     }
     
     draw(ctx) {
@@ -31,16 +32,43 @@ class GolfBall {
         this.pos[1] = e.clientY - this.canvas.offsetTop - 20;
     }
 
-    dropBall(canvas) {
+    dropBall() {
         this.canvas.removeEventListener("mousemove", this.holdBall);
     }
 
-    grabBall(canvas) {
+    grabBall() {
         this.canvas.addEventListener("mousemove", this.holdBall);
     }
     
-    hit() {
+    move(vel) {
         this.pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
+    }
+
+    wallCollision() {
+        // check if the ball hits the top wall or bottom wall
+        const checkTopWall = (this.pos[1] + this.vel[1] < 0);
+        const checkBottomWall = (this.pos[1] + this.vel[1] > this.canvas.height);
+        const checkLeftWall = (this.pos[0] + this.vel[0] < 0);
+        const checkRightWall = (this.pos[0] + this.vel[0] > this.canvas.width);
+        if (checkTopWall || checkBottomWall) {
+            this.vel[1] = -this.vel[1];
+            return true;
+        } else if (checkLeftWall || checkRightWall) {
+            this.vel[0] = -this.vel[0];
+        }
+    }
+
+    decelerate(rate) {
+        // rate = rate ? rate : 1.02;
+
+        if (this.vel[0] !== 0 || this.vel[1] !== 0) {
+            this.vel = [this.vel[0] / rate, this.vel[1] / rate];
+            if (Math.abs(this.vel[0]) < 0.1 && Math.abs(this.vel[1]) < 0.1) {
+                [this.vel[0], this.vel[1]] = [0, 0];
+                this.isMoving = false;
+            }
+            // this.vel = [this.vel[0], this.vel[1]];
+        }
     }
 }
 

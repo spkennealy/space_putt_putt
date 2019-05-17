@@ -1,4 +1,6 @@
 import GameView from './game_view';
+import Game from './game';
+import GolfBall from './golf_ball';
 
 window.addEventListener("DOMContentLoaded", () => {
     let canvas = document.getElementById("canvas");
