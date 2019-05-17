@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/space.jpg');
+    /* background-image: url('https://media.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif'); */
+    background-size: cover;
+    height: 100vh;
+}
+
+#canvas {
+    border: 20px solid rgba(175, 107, 4, 0.774);
+    background: green;
+}
