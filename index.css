@@ -8,7 +8,12 @@ body {
     height: 100vh;
 }
 
-#canvas {
-    border: 20px solid rgba(175, 107, 4, 0.774);
-    background: green;
+#canvas-wrapper {
+    width: 800px;
+    height: 500px;
+    border: 5px solid rgba(175, 107, 4, 0.774);
+    background: rgba(110, 107, 107, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,5 +1,7 @@
-import GolfBall from "./golf_ball";
+import GolfBall from "./objects/golf_ball";
 import { Util } from './util';
+import Hole from "./holes/hole";
+import holes from './holes/all_holes';
 
 class Game {
     constructor(ctx, canvas) {
@@ -7,6 +9,7 @@ class Game {
         this.canvas = canvas;
         this.ballDropped = false;
         this.animate = this.animate.bind(this);
+        this.currentHoleNum = 0;
         
         this.createBall();
         this.start();
@@ -16,15 +19,19 @@ class Game {
     }
 
     start() {
+        this.currentHoleNum += 1;
+        if (this.currentHoleNum > 9) return false;
         this.startHole();
         this.animate(this.ctx);
     }
 
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.currentHole.draw(this.ctx);
         this.golfBall.draw(this.ctx);
         this.golfBall.wallCollision();
         this.golfBall.move();
+        this.golfBall.decelerate();
         requestAnimationFrame(this.animate);
     }
     
@@ -32,7 +39,7 @@ class Game {
         this.golfBall = new GolfBall({
             pos: [40, 250],
             vel: [0, 0],
-            radius: 10,
+            radius: 6,
             canvas: this.canvas
         });
     }
@@ -42,33 +49,32 @@ class Game {
     // -- then add a slow down function to get the ball to stop
     hit(e) {
         let pos = this.getClickPostion(e); 
-        console.log(`This is the click position: ${pos}`);
-        console.log(`This is the golf ball position: ${this.golfBall.pos}`);
+        // console.log(`This is the click position: [${pos}]`);
+        // console.log(`This is the golf ball position: [${this.golfBall.pos}]`);
         let distance = Util.calcDistance(pos, this.golfBall.pos);
-        console.log(`This is the distance from the click to the ball: ${distance}`);
-        let vel = Util.calcVelocity(pos, this.golfBall.pos);
-        console.log(`This is the velocity: ${vel}`);
+        // console.log(`This is the distance from the click to the ball: ${distance}`);
+        let vel = Util.calcVelocity(pos, this.golfBall.pos, distance);
+        // console.log(`This is the velocity: ${vel}`);
         this.golfBall.isMoving = true;
         this.golfBall.vel = vel;
     }
     
     getClickPostion(e) {
-        console.log(e);
-        let mouseX = e.clientX - this.canvas.offsetLeft - 20;
-        console.log(`This is the click position X value: ${mouseX}`);
-        let mouseY = e.clientY - this.canvas.offsetTop - 20;
-        console.log(`This is the click position Y value: ${mouseY}`);
+        let mouseX = e.clientX - this.canvas.offsetLeft;
+        // console.log(`This is the click position X value: ${mouseX}`);
+        let mouseY = e.clientY - this.canvas.offsetTop;
+        // console.log(`This is the click position Y value: ${mouseY}`);
         return [mouseX, mouseY];
     }
 
-    startHole(){
+    startHole(){   
+        this.currentHole = new Hole(this.ctx, holes[this.currentHoleNum - 1]);    
         this.golfBall.grabBall();
         window.addEventListener("click", (e) => {
             if (!this.ballDropped) {
                 this.golfBall.dropBall();
                 this.ballDropped = true;
             } else if (this.ballDropped) {
-                console.log(e);
                 this.hit(e);
             }
         });

@@ -1,4 +1,4 @@
-import * as Util from './util';
+// import * as Util from '../util';
 
 class GolfBall {
     constructor(options) {
@@ -16,7 +16,7 @@ class GolfBall {
     }
     
     draw(ctx) {
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "#39ff14";
         ctx.beginPath();
         ctx.arc(
             this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true
@@ -25,11 +25,19 @@ class GolfBall {
         ctx.linewidth = 1;
         ctx.strokeStyle = "black";
         ctx.stroke();
+        ctx.closePath();
     }
 
     holdBall(e) {
-        this.pos[0] = e.clientX - this.canvas.offsetLeft - 20;
-        this.pos[1] = e.clientY - this.canvas.offsetTop - 20;
+        // TODO: change wallCollision to matBoundaries and have ball stay inside
+        // no matter where the mouse is
+        if (this.wallCollision()) {
+            this.pos[0] = e.clientX - this.canvas.offsetLeft - 5;
+            this.pos[1] = e.clientY - this.canvas.offsetTop - 5;
+        } else {
+            this.pos[0] = e.clientX - this.canvas.offsetLeft - 5;
+            this.pos[1] = e.clientY - this.canvas.offsetTop - 5;
+        }
     }
 
     dropBall() {
@@ -46,10 +54,12 @@ class GolfBall {
 
     wallCollision() {
         // check if the ball hits the top wall or bottom wall
-        const checkTopWall = (this.pos[1] + this.vel[1] < 0);
-        const checkBottomWall = (this.pos[1] + this.vel[1] > this.canvas.height);
-        const checkLeftWall = (this.pos[0] + this.vel[0] < 0);
-        const checkRightWall = (this.pos[0] + this.vel[0] > this.canvas.width);
+        const checkTopWall = ((this.pos[1] + this.vel[1] - this.radius) < 0);
+        const checkBottomWall = ((this.pos[1] + this.vel[1] + this.radius) > this.canvas.height);
+        // check if the ball hits the left or right wall
+        const checkLeftWall = ((this.pos[0] + this.vel[0] - this.radius) < 0);
+        const checkRightWall = ((this.pos[0] + this.vel[0] + this.radius) > this.canvas.width);
+        // if so, change the x velocity or y velocity to its inverse
         if (checkTopWall || checkBottomWall) {
             this.vel[1] = -this.vel[1];
             return true;
@@ -58,16 +68,26 @@ class GolfBall {
         }
     }
 
-    decelerate(rate) {
-        // rate = rate ? rate : 1.02;
+    decelerate() {
+        let rate = 1.0008;
+        let xVel = this.vel[0];
+        let yVel = this.vel[1];
 
-        if (this.vel[0] !== 0 || this.vel[1] !== 0) {
-            this.vel = [this.vel[0] / rate, this.vel[1] / rate];
-            if (Math.abs(this.vel[0]) < 0.1 && Math.abs(this.vel[1]) < 0.1) {
-                [this.vel[0], this.vel[1]] = [0, 0];
+        // console.log(`This is xVel: ${xVel}`);
+        // console.log(`This is yVel: ${yVel}`);
+        if (xVel <  8 || yVel < 8) {
+            rate = 1.02;
+        }
+
+        if (xVel !== 0 || yVel !== 0) {
+
+            this.vel = [xVel / rate, yVel / rate];
+
+            if (Math.abs(xVel) < 0.1 && Math.abs(yVel) < 0.1) {
+                this.vel = [0, 0];
                 this.isMoving = false;
+                // console.log(`End ball position: [${this.pos}]`);
             }
-            // this.vel = [this.vel[0], this.vel[1]];
         }
     }
 }
