@@ -1,4 +1,3 @@
-// import * as Util from '../util';
 
 class GolfBall {
     constructor(options) {
@@ -6,7 +5,10 @@ class GolfBall {
         this.vel = options.vel;
         this.radius = options.radius;
         this.canvas = options.canvas;
+        this.hole = options.hole;
+        // this.walls = options.walls;
         this.isMoving = false;
+        this.sunk = false;
 
         // this.golfBall = new Image();
         // this.golfBall.src = './images/golf_ball_sprite.png';
@@ -29,14 +31,46 @@ class GolfBall {
     }
 
     holdBall(e) {
-        // TODO: change wallCollision to matBoundaries and have ball stay inside
-        // no matter where the mouse is
-        if (this.wallCollision()) {
-            this.pos[0] = e.clientX - this.canvas.offsetLeft - 5;
-            this.pos[1] = e.clientY - this.canvas.offsetTop - 5;
-        } else {
-            this.pos[0] = e.clientX - this.canvas.offsetLeft - 5;
-            this.pos[1] = e.clientY - this.canvas.offsetTop - 5;
+        const matTop = this.hole.matPos[1];
+        const matRight = this.hole.matPos[0] + this.hole.matPos[2];
+        const matBottom = this.hole.matPos[1] + this.hole.matPos[3];
+        const matLeft = this.hole.matPos[0];
+
+        const checkTopMat = ((e.clientY - this.canvas.offsetTop - this.radius) < matTop);
+        const checkRightMat = ((e.clientX - this.canvas.offsetLeft + this.radius) > matRight);
+        const checkBottomMat = ((e.clientY - this.canvas.offsetTop + this.radius) > matBottom);
+        const checkLeftMat = ((e.clientX - this.canvas.offsetLeft - this.radius) < matLeft);
+
+        if (checkTopMat && checkLeftMat) {
+            this.pos[0] = matLeft + this.radius;
+            this.pos[1] = matTop + this.radius;
+        } else if (checkTopMat && checkRightMat) {
+            this.pos[0] = matRight - this.radius;
+            this.pos[1] = matTop + this.radius;
+        } else if (checkBottomMat && checkLeftMat) {
+            this.pos[0] = matLeft + this.radius;
+            this.pos[1] = matBottom - this.radius;
+        } else if (checkBottomMat && checkRightMat) {
+            this.pos[0] = matRight - this.radius;
+            this.pos[1] = matBottom - this.radius;
+        } else if (checkTopMat) {
+            this.pos[0] = e.clientX - this.canvas.offsetLeft;
+            this.pos[1] = matTop + this.radius;
+        } else if (checkRightMat) {
+            this.pos[0] = matRight - this.radius;
+            this.pos[1] = e.clientY - this.canvas.offsetTop;
+        } else if (checkBottomMat) {
+            this.pos[0] = e.clientX - this.canvas.offsetLeft;
+            this.pos[1] = matBottom - this.radius;
+        } else if (checkLeftMat) {
+            this.pos[0] = matLeft + this.radius;
+            this.pos[1] = e.clientY - this.canvas.offsetTop;
+        } else if (checkLeftMat) {
+            this.pos[0] = matLeft + this.radius;
+            this.pos[1] = e.clientY - this.canvas.offsetTop;
+        }else {
+            this.pos[0] = e.clientX - this.canvas.offsetLeft;
+            this.pos[1] = e.clientY - this.canvas.offsetTop;
         }
     }
 
@@ -65,7 +99,30 @@ class GolfBall {
             return true;
         } else if (checkLeftWall || checkRightWall) {
             this.vel[0] = -this.vel[0];
+            return true;
         }
+
+        // TODO: CHECK ALL THE DRAWN WALLS FOR THAT LEVEL
+        // const topWalls = [];
+        // const rightWalls = [];
+        // const bottomWalls = [];
+        // const leftWalls = [];
+
+        // for (let i = 1; i < this.walls.length; i++) {
+        //     const prevWall = this.walls[i-1];
+        //     const currentWall = this.walls[i];
+        //     const nextWall = this.walls[i+1];
+            
+        //     const vertical = currentWall[0] === prevWall[0];
+        //     const nextVertical = currentWall[0] === nextWall[0];
+        //     const horizontal = currentWall[1] === prevWall[1];
+        //     const nextHorizontal = currentWall[1] === nextWall[1];
+
+        //     // if (horizontal && )
+        // }
+
+        return false;
+        
     }
 
     decelerate() {
