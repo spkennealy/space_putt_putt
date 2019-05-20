@@ -1,5 +1,7 @@
 # Space Putt Putt
 
+[Live Demo](https://spkennealy.github.io/space_putt_putt/)
+
 ## Background and Overview
 
 `Space Putt Putt` is a mini golf game that is out of this world. The coures is 
