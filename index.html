@@ -4,9 +4,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <title>Space Putt Putt</title>
 </head>
 <body>
+    <h1 class="title">SPACE PUTT PUTT</h1>
+
+    <nav class="navbar">
+        <div class="links">
+            <button id="new-game">New Game</button>
+            <button id="next-hole">Next Hole</button>
+        </div>
+
+        <div class="scorecard">
+            <h4>Scorecard</h4>
+            <table border="1">
+                <tr>
+                    <th>Hole</th>
+                    <th>Par</th>
+                    <th>Strokes</th>
+                </tr>
+                <tr>
+                    <td id="current-hole"></td>
+                    <td id="current-par"></td>
+                    <td id="current-strokes"></td>
+                </tr>
+            </table>
+        </div>
+    </nav>
+
     <div id="canvas-wrapper">
         <canvas id="canvas"></canvas>
     </div>

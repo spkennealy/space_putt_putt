@@ -12,5 +12,6 @@ export default {
     obstacles: [],
     golfBallColor: "#39ff14",
     matPos: [40, 190, 50, 100],
-    ballPos: [70, 250]
+    ballPos: [70, 250],
+    par: 2
 };
