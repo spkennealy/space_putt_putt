@@ -164,6 +164,8 @@ class Hole {
         });
 
         window.addEventListener("click", (e) => {
+            console.log(e);
+
             if (!this.ballDropped) {
                 // this.golfBall.dropBall();
                 this.ballDropped = true;

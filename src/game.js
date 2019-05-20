@@ -11,11 +11,25 @@ class Game {
         this.totalStrokes = 0;
 
         this.start();
+        this.newGame();
 
         this.getClickPostion = this.getClickPostion.bind(this);
         this.newHole = this.newHole.bind(this);
         this.showHoleNum = this.showHoleNum.bind(this);
         this.hit = this.hit.bind(this);
+        this.newGame = this.newGame.bind(this);
+    }
+
+    newGame() {
+        const newGame = document.getElementById("new-game");
+        newGame.onclick = e => {
+            e.stopPropagation();
+            this.currentHoleNum = 1;
+            this.totalStrokes = 0;
+            this.start();
+            console.log(`Current Hole: ${this.currentHoleNum}`);
+            console.log(`Total Strokes: ${this.currentHoleNum}`);
+        };
     }
 
     start() {
