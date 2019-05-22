@@ -6,7 +6,7 @@ body {
     background-image: url('https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/space.jpg');
     /* background-image: url('https://media.giphy.com/media/3og0IFrHkIglEOg8Ba/giphy.gif'); */
     background-size: cover;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 #canvas-wrapper {
@@ -47,17 +47,27 @@ th, td {
     padding: 10px;
 }
 
-.scorecard {
-    background: whitesmoke;
+.hole-scorecard {
+    background: transparent;;
     width: 200px;
     height: 100px;
     margin: 10px 0;
     padding: 10px;
-    border: 1px solid gold;
+    border: 1px solid white;
     display: block;
+    color: white;
 }
 
-.scorecard h4 {
+th, td {
+    color: white;
+}
+
+.hole-scorecard h4, .scorecard {
     margin: 0;
     padding: 0;
+    text-align: center;
+}
+
+#score, #par {
+    width: 60px;
 }

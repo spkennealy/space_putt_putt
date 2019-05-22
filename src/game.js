@@ -7,7 +7,7 @@ class Game {
         this.ctx = ctx;
         this.canvas = canvas;
         this.currentHole = null;
-        this.currentHoleNum = 0;
+        this.currentHoleNum = 2;
         this.totalStrokes = 0;
 
         this.start();
@@ -27,8 +27,6 @@ class Game {
             this.currentHoleNum = 1;
             this.totalStrokes = 0;
             this.start();
-            console.log(`Current Hole: ${this.currentHoleNum}`);
-            console.log(`Total Strokes: ${this.currentHoleNum}`);
         };
     }
 
@@ -60,9 +58,6 @@ class Game {
         this.currentHole.golfBall.vel = vel;
         this.currentHole.strokes += 1;
         this.totalStrokes += 1;
-
-        console.log(`Stroke #${this.currentHole.strokes}`);
-        console.log(`Total Strokes: ${this.totalStrokes}`);
     }
     
     getClickPostion(e) {
@@ -93,6 +88,7 @@ class Game {
     nextHole() {
         if (this.currentHole.golfBall.sunk) {
             this.currentHoleNum += 1;
+            console.log(`Current Hole: ${this.currentHoleNum}`);
             this.start();
         }
     }

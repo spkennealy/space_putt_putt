@@ -6,7 +6,7 @@ class GolfBall {
         this.radius = options.radius;
         this.canvas = options.canvas;
         this.hole = options.hole;
-        // this.walls = options.walls;
+        this.walls = options.walls;
         this.isMoving = false;
         this.sunk = false;
 
@@ -14,7 +14,7 @@ class GolfBall {
         // this.golfBall.src = './images/golf_ball_sprite.png';
         this.holdBall = this.holdBall.bind(this);
         this.draw = this.draw.bind(this);
-        this.wallCollision = this.wallCollision.bind(this);
+        this.boundaryCollision = this.boundaryCollision.bind(this);
     }
     
     draw(ctx) {
@@ -72,31 +72,13 @@ class GolfBall {
             this.pos[0] = e.pageX - this.canvas.offsetLeft;
             this.pos[1] = e.pageY - this.canvas.offsetTop;
         }
-
-        // console.log(`Ball pos: [${this.pos}]`);
-        // console.log(`Offset (left, top): [${this.canvas.offsetLeft}, ${this.canvas.offsetTop}]`);
-        // console.log(`Mouse pos: [${e.pageX}, ${e.pageY}]`);
     }
-
-    // dropBall() {
-    //     this.canvas.removeEventListener("mousemove", this.holdBall);
-    // }
-
-    // grabBall() {
-        // window.addEventListener("mousemove", e => {
-        //     if (this.ballDropped) {
-        //         this.drawPutterArrow(e);
-        //     } else {
-        //         this.golfBall.holdBall(e);
-        //     }
-        // });
-    // }
     
-    move(vel) {
+    move() {
         this.pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
     }
 
-    wallCollision() {
+    boundaryCollision() {
         // check if the ball hits the top wall or bottom wall
         const checkTopWall = ((this.pos[1] + this.vel[1] - this.radius) < 0);
         const checkBottomWall = ((this.pos[1] + this.vel[1] + this.radius) > this.canvas.height);
@@ -106,13 +88,37 @@ class GolfBall {
         // if so, change the x velocity or y velocity to its inverse
         if (checkTopWall || checkBottomWall) {
             this.vel[1] = -this.vel[1];
-            return true;
         } else if (checkLeftWall || checkRightWall) {
             this.vel[0] = -this.vel[0];
-            return true;
         }
+    }
 
-        return false;
+    wallCollision() {
+        for (let i = 0; i < this.walls.length; i++) {
+            let wallDimensions = this.walls[i];
+            
+            const checkWallWidth = (
+                (this.pos[0] + this.vel[0] + this.radius) > wallDimensions[0] &&
+                (this.pos[0] + this.vel[0] - this.radius) < (wallDimensions[0] + wallDimensions[2])
+            );
+
+            const checkWallHeight = (
+                (this.pos[1] + this.vel[1] + this.radius) > wallDimensions[1] &&
+                (this.pos[1] + this.vel[1] + this.radius) < (wallDimensions[1] + wallDimensions[3])
+            );
+
+            const checkVerticalDirection = (
+                (this.pos[1] < wallDimensions[1]) || (this.pos[1] > (wallDimensions[1] + wallDimensions[3]))
+            );
+
+            if (checkWallWidth && checkWallHeight) {
+                if (checkVerticalDirection) {
+                    this.vel[1] = -this.vel[1];
+                } else {
+                    this.vel[0] = -this.vel[0];
+                }
+            }
+        }
     }
 
     decelerate() {

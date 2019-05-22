@@ -6,13 +6,12 @@ class Hole {
         this.ctx = ctx;
         this.canvas = canvas;
         this.game = game;
-        this.walls = options.walls;
-        this.wallColor = options.wallColor;
         this.golfBallColor = options.golfBallColor;
         this.ballPos = options.ballPos;
         this.holePos = options.holePos;
         this.matPos = options.matPos;
-        this.obstacles = options.obstacles;
+        this.walls = options.walls;
+        this.wallColor = options.wallColor;
         this.par = options.par;
         this.ballStopped = true;
         this.ballDropped = false;
@@ -27,9 +26,9 @@ class Hole {
         
         this.newGolfBall = this.newGolfBall.bind(this);
         this.drawHole = this.drawHole.bind(this);
-        this.drawHoleWalls = this.drawHoleWalls.bind(this);
         this.drawMat = this.drawMat.bind(this);
         this.drawPutterArrow = this.drawPutterArrow.bind(this);
+        this.drawWalls = this.drawWalls.bind(this);
         this.startHole = this.startHole.bind(this);
         this.sunkBall = this.sunkBall.bind(this);
         this.draw = this.draw.bind(this);
@@ -37,12 +36,13 @@ class Hole {
 
     draw() {
         this.drawHole(this.ctx, this.holePos);
-        // this.drawHoleWalls();
         this.drawMat();
+        this.drawWalls();
         this.showStrokes();
-        
+
         if (!this.golfBall.sunk) {
             this.golfBall.draw(this.ctx);
+            this.golfBall.boundaryCollision();
             this.golfBall.wallCollision();
             this.golfBall.move();
             this.golfBall.decelerate();
@@ -53,28 +53,19 @@ class Hole {
             this.ballStopped = true;
         }
 
-        // this.drawPutterArrow();
-        // this.golfBall.grabBall();
+        if (this.ballStopped && this.ballDropped) {
+            this.drawPutterArrow();
+        }
     }
 
-    drawHoleWalls() {
-        const startPoint = this.walls[0];
-        
-        this.ctx.beginPath();
-        this.ctx.moveTo(startPoint[0], startPoint[1]);
-        const walls = this.walls.slice(1);
-        walls.forEach(wallPos => {
-            this.ctx.lineTo(wallPos[0], wallPos[1]);
+    drawWalls() {
+        this.walls.forEach(obst => {
+            this.ctx.beginPath();
+            this.ctx.rect(...obst);
+            this.ctx.fillStyle = this.wallColor;
+            this.ctx.fill();
+            this.ctx.closePath();
         });
-        this.ctx.lineWidth = 10;
-        this.ctx.strokeStyle = this.wallColor;
-        this.ctx.shadowColor = 'yellow';
-        this.ctx.shadowBlur = 10;
-        this.ctx.stroke();
-        this.ctx.closePath();
-        this.ctx.lineWidth = 1;
-        this.ctx.shadowColor = 'none';
-        this.ctx.shadowBlur = 0;
     }
 
     drawMat() {
@@ -91,7 +82,8 @@ class Hole {
             vel: [0, 0],
             radius: 6,
             canvas: this.canvas,
-            hole: this
+            hole: this,
+            walls: this.walls
         });
         
     }
@@ -113,61 +105,39 @@ class Hole {
         ctx.closePath();
     }
 
-    drawPutterArrow(e) {
-        // TODO: get arrow to stop being cleared by the hole draw;
-        if (this.ballStopped && this.ballDropped) {
-            // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-            this.ctx.beginPath();
-            const ballX = this.golfBall.pos[0];
-            const ballY = this.golfBall.pos[1];
-            
-            this.ctx.moveTo(ballX, ballY);
-            const mouseX = this.game.getClickPostion(e)[0];
-            // const mouseX = e.pageX - this.canvas.offsetLeft;
-            const mouseY = this.game.getClickPostion(e)[1];
-            // const mouseY = e.pageY - this.canvas.offsetTop;
-            const diffX = ballX - mouseX;
-            const diffY = ballY - mouseY;
-            const arrowX = ballX + diffX;
-            const arrowY = ballY + diffY;
-            
-            // console.log(`ballX: ${ballX}`);
-            // console.log(`ballY: ${ballY}`);
-            // console.log(`MouseX: ${mouseX}`);
-            // console.log(`MouseY: ${mouseY}`);
-            // console.log(`diffX: ${diffX}`);
-            // console.log(`diffY: ${diffY}`);
-            // console.log(`arrowX: ${arrowX}`);
-            // console.log(`arrowY: ${arrowY}`);
-            
-            this.ctx.lineTo(arrowX, arrowY);
-            
-            this.ctx.lineWidth = 3;
-            this.ctx.strokeStyle = "whitesmoke";
-            this.ctx.stroke();
-            this.ctx.lineWidth = 1;
-            this.ctx.strokeStyle = "none";
-            this.ctx.closePath();
-            // debugger;
-
-        }
+    drawPutterArrow() {
+        this.ctx.beginPath();
+        const ballX = this.golfBall.pos[0];
+        const ballY = this.golfBall.pos[1];
+        
+        this.ctx.moveTo(ballX, ballY);
+        const mouseX = this.mousePos[0] - this.canvas.offsetLeft;
+        const mouseY = this.mousePos[1] - this.canvas.offsetTop;
+        const diffX = ballX - mouseX;
+        const diffY = ballY - mouseY;
+        const arrowX = ballX + diffX;
+        const arrowY = ballY + diffY;
+        
+        this.ctx.lineTo(arrowX, arrowY);
+        
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = "whitesmoke";
+        this.ctx.stroke();
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = "none";
+        this.ctx.closePath();
     }
 
     startHole() {
         window.addEventListener("mousemove", e => {
-            if (this.ballDropped) {
-                this.drawPutterArrow(e);
-            } else {
+            this.mousePos = [e.pageX, e.pageY];
+            if (!this.ballDropped) {
                 this.golfBall.holdBall(e);
             }
         });
 
         window.addEventListener("click", (e) => {
-            console.log(e);
-
             if (!this.ballDropped) {
-                // this.golfBall.dropBall();
                 this.ballDropped = true;
             } else if (this.ballDropped && this.ballStopped) {
                 this.game.hit(e);
@@ -189,6 +159,7 @@ class Hole {
             // console.log(`Is ${this.golfBall.vel[0]} less than 7: ${Math.abs(this.golfBall.vel[0]) < 7 ? "true" : "false"}`);
             if (checkVelocity === true) {
                 this.golfBall.sunk = true;
+                
             }
         }
     }
