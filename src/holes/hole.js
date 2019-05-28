@@ -12,6 +12,8 @@ class Hole {
         this.matPos = options.matPos;
         this.walls = options.walls;
         this.wallColor = options.wallColor;
+        this.triangles = options.triangles;
+        this.trianglesColor = options.trianglesColor;
         this.par = options.par;
         this.ballStopped = true;
         this.ballDropped = false;
@@ -29,6 +31,7 @@ class Hole {
         this.drawMat = this.drawMat.bind(this);
         this.drawPutterArrow = this.drawPutterArrow.bind(this);
         this.drawWalls = this.drawWalls.bind(this);
+        this.drawTriangle = this.drawTriangle.bind(this);
         this.startHole = this.startHole.bind(this);
         this.sunkBall = this.sunkBall.bind(this);
         this.draw = this.draw.bind(this);
@@ -38,6 +41,7 @@ class Hole {
         this.drawHole(this.ctx, this.holePos);
         this.drawMat();
         this.drawWalls();
+        this.drawTriangle();
         this.showStrokes();
 
         if (!this.golfBall.sunk) {
@@ -59,14 +63,37 @@ class Hole {
     }
 
     drawWalls() {
-        this.walls.forEach(obst => {
+        this.walls.forEach(wall => {
             this.ctx.beginPath();
-            this.ctx.rect(...obst);
+            this.ctx.rect(...wall);
             this.ctx.fillStyle = this.wallColor;
             this.ctx.fill();
             this.ctx.closePath();
         });
     }
+
+    drawTriangle() {
+        console.log(`I'm drawing...`);
+        this.triangles.forEach(triangle => {
+            this.ctx.beginPath();
+            this.ctx.fillStyle = this.trianglesColor;
+            this.ctx.moveTo(triangle[0], triangle[1]);
+            this.ctx.lineTo(triangle[2], triangle[3]);
+            this.ctx.lineTo(triangle[4], triangle[5]);
+            this.ctx.closePath();
+            this.ctx.lineWidth = triangle[6];
+            this.ctx.strokeStyle = this.trianglesColor;
+            this.ctx.fill();
+            this.ctx.stroke();
+            this.ctx.lineWidth = 1;
+            this.ctx.strokeStyle = "none";
+        });
+    }
+
+    // TODO: ADD IMAGES FOR CUSTOM OBJECTS
+    // drawCustomObjects() {
+
+    // }
 
     drawMat() {
         this.ctx.beginPath();
@@ -83,7 +110,8 @@ class Hole {
             radius: 6,
             canvas: this.canvas,
             hole: this,
-            walls: this.walls
+            walls: this.walls,
+            objects: [this.triangles]
         });
         
     }

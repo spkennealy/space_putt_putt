@@ -7,6 +7,7 @@ class GolfBall {
         this.canvas = options.canvas;
         this.hole = options.hole;
         this.walls = options.walls;
+        this.objects = options.objects;
         this.isMoving = false;
         this.sunk = false;
 
@@ -104,7 +105,7 @@ class GolfBall {
 
             const checkWallHeight = (
                 (this.pos[1] + this.vel[1] + this.radius) > wallDimensions[1] &&
-                (this.pos[1] + this.vel[1] + this.radius) < (wallDimensions[1] + wallDimensions[3])
+                (this.pos[1] + this.vel[1] - this.radius) < (wallDimensions[1] + wallDimensions[3])
             );
 
             const checkVerticalDirection = (
@@ -119,6 +120,33 @@ class GolfBall {
                 }
             }
         }
+    }
+
+    // TODO: edit to make bounce off of triangle
+    objectCollision() {
+        this.objects.forEach(object => {
+            const checkWallWidth = (
+                (this.pos[0] + this.vel[0] + this.radius) > object[0] &&
+                (this.pos[0] + this.vel[0] - this.radius) < (object[0] + object[2])
+            );
+
+            const checkWallHeight = (
+                (this.pos[1] + this.vel[1] + this.radius) > object[1] &&
+                (this.pos[1] + this.vel[1] + this.radius) < (object[1] + object[3])
+            );
+
+            const checkVerticalDirection = (
+                (this.pos[1] < object[1]) || (this.pos[1] > (object[1] + object[3]))
+            );
+
+            if (checkWallWidth && checkWallHeight) {
+                if (checkVerticalDirection) {
+                    this.vel[1] = -this.vel[1];
+                } else {
+                    this.vel[0] = -this.vel[0];
+                }
+            }
+        });
     }
 
     decelerate() {
