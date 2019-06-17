@@ -18,9 +18,9 @@ then the player will take another shot until the ball goes in the hole.
 ![](/images/screen_shot1.png)
 
 ## Functionality and MVP Features
-- [*] Ability to place golf ball on first click and to hit golf ball on second click
-- [*] Acceleration and slow down of golf ball
-- [*] Layout of one single hole
+- [x] Ability to place golf ball on first click and to hit golf ball on second click
+- [x] Acceleration and slow down of golf ball
+- [x] Layout of one single hole
 - [ ] Additional holes
 
 ## Architecture and Technologies
