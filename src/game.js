@@ -10,8 +10,6 @@ class Game {
         this.currentHoleNum = 0;
         this.totalStrokes = 0;
 
-        // this.welcomeMessage();
-        // this.start();
         this.newGame();
 
         this.getClickPostion = this.getClickPostion.bind(this);
@@ -20,7 +18,6 @@ class Game {
         this.hit = this.hit.bind(this);
         this.newGame = this.newGame.bind(this);
         this.start = this.start.bind(this);
-        // this.welcomeMessage = this.welcomeMessage.bind(this);
     }
 
     newGame() {
@@ -31,43 +28,33 @@ class Game {
         const instructionsBack = document.getElementById("instructions-back");
 
         howToPlayButton.onclick = e => {
-            howToPlayMessage.style.display = "flex";
-            welcomeMessage.style.display = "none";
+            setTimeout(() => {
+                howToPlayMessage.style.display = "flex";
+                welcomeMessage.style.display = "none";
+            }, 200);
         };
-        // debugger;
 
         instructionsBack.onclick = e => {
-            howToPlayMessage.style.display = "none";
-            welcomeMessage.style.display = "flex";
+            setTimeout(() => {
+                howToPlayMessage.style.display = "none";
+                welcomeMessage.style.display = "flex";
+            }, 200);
         };
 
         newGame.forEach(button => {
             button.onclick = e => {
-                console.log("Clicked");
-                welcomeMessage.style.display = "none";
-                howToPlayMessage.style.display = "none";
-                e.stopPropagation();
-                this.currentHoleNum = 1;
-                this.totalStrokes = 0;
-                this.start();
+                setTimeout(() => {
+                    console.log("Clicked");
+                    welcomeMessage.style.display = "none";
+                    howToPlayMessage.style.display = "none";
+                    e.stopPropagation();
+                    this.currentHoleNum = 1;
+                    this.totalStrokes = 0;
+                    this.start();
+                }, 200);
             };
         });
     }
-
-    // welcomeMessage() {
-    //     // canvas 800 x 500
-
-    //     this.ctx.beginPath();
-    //     this.ctx.rect(100, 100, 600, 300);
-    //     this.ctx.fillStyle = "whitesmoke";
-    //     this.ctx.fill();
-    //     this.ctx.closePath();
-
-    //     this.ctx.font = '48px Monoton';
-    //     this.ctx.fillStyle = "black";
-    //     this.ctx.fillText('Welcome to', 200, 160);
-    //     this.ctx.fillText('Space Putt Putt', 150, 210);
-    // }
 
     start() {
         if (this.currentHoleNum === 0) {

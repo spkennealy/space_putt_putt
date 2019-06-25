@@ -48,8 +48,31 @@ th, td {
     box-shadow: 0 0 10px whitesmoke;
 }
 
-.links button {
-    
+.buttons {
+    background: gray;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.3s;
+    border: 2px solid gray;
+    outline: 0;
+}
+
+.buttons:hover {
+    background: white;
+    color: black;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 2px solid rgba(175, 107, 4, 0.774);
+    outline: 0;
+}
+
+.buttons:active {
+    transform: scale(0.9);
+    outline: 0;
 }
 
 .hole-scorecard {
@@ -144,4 +167,17 @@ th, td {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.hole-sink-message-container {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    color: black;
+    width: 300px;
+    padding: 20px;
+    margin-top: 15px;
 }
