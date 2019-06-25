@@ -7,10 +7,11 @@ class Game {
         this.ctx = ctx;
         this.canvas = canvas;
         this.currentHole = null;
-        this.currentHoleNum = 2;
+        this.currentHoleNum = 0;
         this.totalStrokes = 0;
 
-        this.start();
+        // this.welcomeMessage();
+        // this.start();
         this.newGame();
 
         this.getClickPostion = this.getClickPostion.bind(this);
@@ -18,17 +19,43 @@ class Game {
         this.showHoleNum = this.showHoleNum.bind(this);
         this.hit = this.hit.bind(this);
         this.newGame = this.newGame.bind(this);
+        // this.welcomeMessage = this.welcomeMessage.bind(this);
     }
 
     newGame() {
-        const newGame = document.getElementById("new-game");
+        const newGame = document.getElementsByClassName("new-game");
+        const welcomeMessage = document.getElementById("welcome-message");
+        const howToPlayButton = document.getElementById("instruction");
+        const howToPlayMessage = document.getElementById("instructions");
+
+        howToPlayButton.onclick = e => {
+            howToPlayMessage.style.display = "flex";
+            welcomeMessage.style.display = "none";
+        };
+        
         newGame.onclick = e => {
+            welcomeMessage.style.display = "none";
             e.stopPropagation();
             this.currentHoleNum = 1;
             this.totalStrokes = 0;
             this.start();
         };
     }
+
+    // welcomeMessage() {
+    //     // canvas 800 x 500
+
+    //     this.ctx.beginPath();
+    //     this.ctx.rect(100, 100, 600, 300);
+    //     this.ctx.fillStyle = "whitesmoke";
+    //     this.ctx.fill();
+    //     this.ctx.closePath();
+
+    //     this.ctx.font = '48px Monoton';
+    //     this.ctx.fillStyle = "black";
+    //     this.ctx.fillText('Welcome to', 200, 160);
+    //     this.ctx.fillText('Space Putt Putt', 150, 210);
+    // }
 
     start() {
         if (this.currentHoleNum === 0) {

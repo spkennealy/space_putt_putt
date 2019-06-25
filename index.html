@@ -12,19 +12,19 @@
 
     <nav class="navbar">
         <div class="links">
-            <button id="new-game">New Game</button>
-            <!-- <button id="next-hole">Next Hole</button> -->
+            <button class="new-game">New Game</button>
+            <button id="next-hole">Next Hole</button>
         </div>
 
         <div class="hole-scorecard">
             <h4>Current Hole</h4>
-            <table border="1">
-                <tr>
+            <table border="1" id="hole-scorecard-table">
+                <tr class="hole-scorecard-row" >
                     <th>Hole</th>
                     <th>Par</th>
                     <th>Strokes</th>
                 </tr>
-                <tr>
+                <tr class="hole-scorecard-row">
                     <td id="current-hole"></td>
                     <td id="current-par"></td>
                     <td id="current-strokes"></td>
@@ -32,6 +32,44 @@
             </table>
         </div>
     </nav>
+
+    <div id="welcome-message">
+        <header>
+            <h4>Welcome to <br>
+                Space Putt Putt</h4>
+        </header>
+        <nav class="welcome-message-buttons">
+            <button class="new-game">New Game</button>
+            <button id="instruction">How to Play</button>
+        </nav>
+    </div>
+
+    <div id="instructions">
+        <header>
+            <h4>How to Play:</h4>
+            <p>
+                Click "New Game" to start. The first hole will start and you will 
+                see a ball on a blue mat, like below.
+                <br>
+                <br>
+                <img src="images/mat.png" id="mat-screenshot">
+                <br>
+                Click anywhere on the mat to drop the ball where you want it to be
+                placed. Once you have dropped the ball, your mouse becomes the putter
+                and an arrow will appear in the opposite direction from where your
+                mouse is. Use the arrow to determine the speed and angle at which
+                the ball will be hit.
+                <br>
+                <br>
+                Once you have determined the direction and speed at which you want
+                the ball to go, click again to hit the ball.
+                <br>
+                <br>
+                Continue this until you have sunk the ball in the hole! Good luck!
+            </p>
+            <button class="new-game">New Game</button>
+        </header>
+    </div>
 
     <div id="canvas-wrapper">
         <canvas id="canvas"></canvas>
@@ -41,7 +79,7 @@
     <footer>
         <div class="scorecard">
             <h4>Scorecard</h4>
-            <table border="1">
+            <table border="1" class="scorecard-table">
                 <tr>
                     <th>Holes</th>
                     <th>1</th>

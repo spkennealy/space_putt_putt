@@ -28,7 +28,7 @@ th, td {
 .title {
     font-family: 'Monoton', cursive;
     color: white;
-    font-size: 56;
+    font-size: 56px;
     margin: 10px 0;
 }
 
@@ -45,6 +45,11 @@ th, td {
     margin: 10px 0;
     border: 1px solid white;
     padding: 10px;
+    box-shadow: 0 0 10px whitesmoke;
+}
+
+.links button {
+    
 }
 
 .hole-scorecard {
@@ -56,6 +61,7 @@ th, td {
     border: 1px solid white;
     display: block;
     color: white;
+    box-shadow: 0 0 10px whitesmoke;
 }
 
 th, td {
@@ -68,6 +74,74 @@ th, td {
     text-align: center;
 }
 
+.hole-scorecard-row {
+    height: 25px;
+}
+
+#hole-scorecard-table {
+    margin-top: 10px;
+}
+
 #score, #par {
     width: 60px;
+}
+
+.scorecard-table {
+    box-shadow: 0 0 10px whitesmoke;
+    margin-bottom: 50px;
+}
+
+.scorecard h4 {
+    font-family: 'sans-serif';
+    color: white;
+    font-size: 25px;
+    margin: 30px 0 10px 0;
+    text-transform: uppercase;
+}
+
+#welcome-message {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    color: black;
+}
+
+#welcome-message h4 {
+    font-family: 'Monoton', cursive;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px;
+}
+
+.welcome-message-buttons {
+    margin-bottom: 20px;
+}
+
+#instructions {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    color: black;
+    width: 550px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+#instructions h4 {
+    font-family: 'Monoton', cursive;
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 10px 10px 10px;
+}
+
+#mat-screenshot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
