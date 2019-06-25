@@ -28,12 +28,19 @@ class Game {
         const welcomeMessage = document.getElementById("welcome-message");
         const howToPlayButton = document.getElementById("instruction");
         const howToPlayMessage = document.getElementById("instructions");
+        const instructionsBack = document.getElementById("instructions-back");
 
         howToPlayButton.onclick = e => {
             howToPlayMessage.style.display = "flex";
             welcomeMessage.style.display = "none";
         };
         // debugger;
+
+        instructionsBack.onclick = e => {
+            howToPlayMessage.style.display = "none";
+            welcomeMessage.style.display = "flex";
+        };
+
         newGame.forEach(button => {
             button.onclick = e => {
                 console.log("Clicked");
