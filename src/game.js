@@ -19,11 +19,12 @@ class Game {
         this.showHoleNum = this.showHoleNum.bind(this);
         this.hit = this.hit.bind(this);
         this.newGame = this.newGame.bind(this);
+        this.start = this.start.bind(this);
         // this.welcomeMessage = this.welcomeMessage.bind(this);
     }
 
     newGame() {
-        const newGame = document.getElementsByClassName("new-game");
+        const newGame = document.querySelectorAll(".new-game");
         const welcomeMessage = document.getElementById("welcome-message");
         const howToPlayButton = document.getElementById("instruction");
         const howToPlayMessage = document.getElementById("instructions");
@@ -32,14 +33,18 @@ class Game {
             howToPlayMessage.style.display = "flex";
             welcomeMessage.style.display = "none";
         };
-        
-        newGame.onclick = e => {
-            welcomeMessage.style.display = "none";
-            e.stopPropagation();
-            this.currentHoleNum = 1;
-            this.totalStrokes = 0;
-            this.start();
-        };
+        // debugger;
+        newGame.forEach(button => {
+            button.onclick = e => {
+                console.log("Clicked");
+                welcomeMessage.style.display = "none";
+                howToPlayMessage.style.display = "none";
+                e.stopPropagation();
+                this.currentHoleNum = 1;
+                this.totalStrokes = 0;
+                this.start();
+            };
+        });
     }
 
     // welcomeMessage() {
