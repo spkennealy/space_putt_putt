@@ -5,7 +5,7 @@ export default {
         [280, 200, 50, 300],
         [480, 0, 50, 300]
     ],
-    triangles: [[0, 0, 0, 40, 40, 0, 5], []],
+    triangles: [[]], /* [[0, 0, 0, 40, 40, 0, 5], []] */
     trianglesColor: "rgb(128, 128, 128, 0.6)",
     wallColor: "rgb(128, 128, 128, 0.6)",
     golfBallColor: "#0000FF",

@@ -18,11 +18,10 @@ class Hole {
         this.ballStopped = true;
         this.ballDropped = false;
         this.golfBall = null;
-        this.strokes = 0;
+        // this.strokes = 0;
         
-        this.newGolfBall();
-        this.draw();
         this.startHole();
+        this.draw();
         this.showPar();
         this.showStrokes();
         
@@ -35,6 +34,9 @@ class Hole {
         this.startHole = this.startHole.bind(this);
         this.sunkBall = this.sunkBall.bind(this);
         this.draw = this.draw.bind(this);
+        this.strokeMessage = this.strokeMessage.bind(this);
+        this.hitBall = this.hitBall.bind(this);
+        this.mousemove = this.mousemove.bind(this);
     }
 
     draw() {
@@ -73,7 +75,7 @@ class Hole {
     }
 
     drawTriangle() {
-        console.log(`I'm drawing...`);
+        // console.log(`I'm drawing...`);
         this.triangles.forEach(triangle => {
             this.ctx.beginPath();
             this.ctx.fillStyle = this.trianglesColor;
@@ -134,6 +136,7 @@ class Hole {
     }
 
     drawPutterArrow() {
+        // debugger
         this.ctx.beginPath();
         const ballX = this.golfBall.pos[0];
         const ballY = this.golfBall.pos[1];
@@ -157,21 +160,43 @@ class Hole {
     }
 
     startHole() {
-        window.addEventListener("mousemove", e => {
-            this.mousePos = [e.pageX, e.pageY];
-            if (!this.ballDropped) {
-                this.golfBall.holdBall(e);
-            }
-        });
+        this.newGolfBall();
 
-        window.addEventListener("click", (e) => {
-            if (!this.ballDropped) {
-                this.ballDropped = true;
-            } else if (this.ballDropped && this.ballStopped) {
-                this.game.hit(e);
-                this.ballStopped = false;
-            }
-        });
+        this.ballDropped = false;
+        this.ballStopped = true;
+        this.strokes = 0;
+        let a = e => this.mousemove(e);
+        let b = e => this.hitBall(e);
+
+        console.log(`ball dropped: ${this.ballDropped}`);
+        if (this.game.currentHoleNum === 1) {
+            window.addEventListener("mousemove", a);
+            window.addEventListener("click", b);
+        } else {
+            window.removeEventListener("mousemove", a);
+            window.removeEventListener("click", b);
+            window.addEventListener("mousemove", a);
+            window.addEventListener("click", b);
+        }
+    }
+
+    mousemove(e) {
+        this.mousePos = [e.pageX, e.pageY];
+        if (!this.ballDropped) {
+            this.golfBall.holdBall(e);
+        }
+    }
+
+    hitBall(e) {
+        if (e.target.id === "next-hole") return;
+
+        if (!this.ballDropped && this.strokes === 0) {
+            this.ballDropped = true;
+        } else if (this.ballDropped && this.ballStopped) {
+            this.game.hit(e);
+            this.strokes += 1;
+            this.ballStopped = false;
+        }
     }
 
     sunkBall() {
@@ -188,10 +213,31 @@ class Hole {
             if (checkVelocity === true) {
                 this.golfBall.sunk = true;
                 
+                setTimeout(() => {
+                    const sunkMessage = document.getElementById("sink-message-container");
+                    const sunkMessageText = document.getElementById("sink-message");
+                    sunkMessage.style.display = "flex";
+                    sunkMessageText.innerHTML = this.strokeMessage();
+                }, 500);
             }
         }
     }
 
+    strokeMessage() {
+        if (this.strokes === 1) {
+            return "Hole in one!!! <br> Excellent Shot!";
+        } else if (this.par - this.strokes === 1) {
+            return "You got a birdie!!!";
+        } else if (this.par - this.strokes === 2) {
+            return "Wow!!! Eagle!!!";
+        } else if (this.par === this.strokes) {
+            return "Solid par!";
+        } else if (this.strokes - this.par === 1) {
+            return "Bogey 😢";
+        } else if (this.strokes > this.par + 1) {
+            return "Ouch, rough hole 😭";
+        }
+    }
 
     showPar() {
         const tablePar = document.getElementById("current-par");

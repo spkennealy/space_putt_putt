@@ -35,17 +35,21 @@ th, td {
 .navbar {
     width: 800px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .links {
     background: transparent;
     width: 200px;
     height: 100px;
-    margin: 10px 0;
+    margin: 10px 50px 10px 0;
     border: 1px solid white;
     padding: 10px;
     box-shadow: 0 0 10px whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .buttons {
@@ -73,6 +77,15 @@ th, td {
 .buttons:active {
     transform: scale(0.9);
     outline: 0;
+}
+
+#next-hole {
+    margin-top: 20px;
+}
+
+#nav-new-game, #next-hole {
+    width: 80%;
+    font-size: 17px;
 }
 
 .hole-scorecard {
@@ -130,6 +143,7 @@ th, td {
     align-items: center;
     background: whitesmoke;
     color: black;
+    box-shadow: 0 0 10px whitesmoke;
 }
 
 #welcome-message h4 {
@@ -154,6 +168,7 @@ th, td {
     width: 550px;
     padding: 20px;
     margin-top: 15px;
+    box-shadow: 0 0 10px whitesmoke;
 }
 
 #instructions h4 {
@@ -169,15 +184,22 @@ th, td {
     margin-right: auto;
 }
 
-.hole-sink-message-container {
+#sink-message-container {
     position: absolute;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: whitesmoke;
-    color: black;
-    width: 300px;
+    background: transparent;
+    color: white;
     padding: 20px;
     margin-top: 15px;
+}
+
+#sink-message {
+    font-size: 55px;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    font-family: 'Monoton', cursive;
 }

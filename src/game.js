@@ -26,6 +26,11 @@ class Game {
         const howToPlayButton = document.getElementById("instruction");
         const howToPlayMessage = document.getElementById("instructions");
         const instructionsBack = document.getElementById("instructions-back");
+        const nextHole = document.getElementById("next-hole");
+
+        nextHole.onclick = e => {
+            this.nextHole();
+        };
 
         howToPlayButton.onclick = e => {
             setTimeout(() => {
@@ -44,7 +49,7 @@ class Game {
         newGame.forEach(button => {
             button.onclick = e => {
                 setTimeout(() => {
-                    console.log("Clicked");
+                    // console.log("Clicked");
                     welcomeMessage.style.display = "none";
                     howToPlayMessage.style.display = "none";
                     e.stopPropagation();
@@ -82,7 +87,7 @@ class Game {
         // console.log(`This is the velocity: ${vel}`);
         this.currentHole.golfBall.isMoving = true;
         this.currentHole.golfBall.vel = vel;
-        this.currentHole.strokes += 1;
+        // this.currentHole.strokes += 1;
         this.totalStrokes += 1;
     }
     
@@ -114,6 +119,8 @@ class Game {
     nextHole() {
         if (this.currentHole.golfBall.sunk) {
             this.currentHoleNum += 1;
+            const sunkMessage = document.getElementById("sink-message-container");
+            sunkMessage.style.display = "none";
             console.log(`Current Hole: ${this.currentHoleNum}`);
             this.start();
         }
