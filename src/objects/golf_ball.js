@@ -94,7 +94,6 @@ class GolfBall {
         }
     }
 
-    // TODO: Potentially add in a check for the corners
     wallCollision() {
         for (let i = 0; i < this.walls.length; i++) {
             let wallDimensions = this.walls[i];
@@ -157,7 +156,7 @@ class GolfBall {
 
         // console.log(`This is xVel: ${xVel}`);
         // console.log(`This is yVel: ${yVel}`);
-        if (xVel <  8 || yVel < 8) {
+        if (xVel.abs >  8 || yVel.abs > 8) {
             rate = 1.02;
         }
 
