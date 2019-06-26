@@ -48,11 +48,13 @@ class Hole {
 
         if (!this.golfBall.sunk) {
             this.golfBall.draw(this.ctx);
-            this.golfBall.boundaryCollision();
-            this.golfBall.wallCollision();
-            this.golfBall.move();
-            this.golfBall.decelerate();
-            this.sunkBall();
+            if (this.golfBall.isMoving) {
+                this.golfBall.boundaryCollision();
+                this.golfBall.wallCollision();
+                this.golfBall.move();
+                this.golfBall.decelerate();
+                this.sunkBall();
+            }
         }
         
         if (this.golfBall.vel[0] === 0 && this.golfBall.vel[1] === 0) {
