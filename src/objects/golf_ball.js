@@ -160,10 +160,10 @@ class GolfBall {
             (xVel < -3.5 && xVel >= -8) || (yVel < -3.5 && yVel >= -8)) {
             rate = 1.035;
         } else if (xVel > 8 || yVel > 8 || xVel < -8 || yVel < -8) {
-            rate = 1.04;
+            rate = 1.03;
         } else if ((xVel > 0 && xVel <= 3.5) || (yVel > 0 && yVel <= 3.5) ||
             (xVel < 0 && xVel >= -3.5) || (yVel < 0 && yVel >= 3.5)) {
-            rate = 1.05;
+            rate = 1.04;
         }
         // console.log(`This is the rate: ${rate}`);
 
