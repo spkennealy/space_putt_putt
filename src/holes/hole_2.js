@@ -13,13 +13,3 @@ export default {
     ballPos: [70, 425],
     par: 3
 };
-
-// objects => [
-//     staring X coor, 
-//     starting Y coor, 
-//     line1 to X,
-//     line1 to Y,
-//     line2 to X,
-//     line2 to Y,
-//     line width
-// ]

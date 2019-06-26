@@ -18,7 +18,7 @@ class Hole {
         this.ballStopped = true;
         this.ballDropped = false;
         this.golfBall = null;
-        // this.strokes = 0;
+        this.strokes = 0;
         
         this.startHole();
         this.draw();
@@ -75,7 +75,6 @@ class Hole {
     }
 
     drawTriangle() {
-        // console.log(`I'm drawing...`);
         this.triangles.forEach(triangle => {
             this.ctx.beginPath();
             this.ctx.fillStyle = this.trianglesColor;
@@ -91,11 +90,6 @@ class Hole {
             this.ctx.strokeStyle = "none";
         });
     }
-
-    // TODO: ADD IMAGES FOR CUSTOM OBJECTS
-    // drawCustomObjects() {
-
-    // }
 
     drawMat() {
         this.ctx.beginPath();
@@ -136,7 +130,6 @@ class Hole {
     }
 
     drawPutterArrow() {
-        // debugger
         this.ctx.beginPath();
         const ballX = this.golfBall.pos[0];
         const ballY = this.golfBall.pos[1];
@@ -165,18 +158,17 @@ class Hole {
         this.ballDropped = false;
         this.ballStopped = true;
         this.strokes = 0;
-        let a = e => this.mousemove(e);
-        let b = e => this.hitBall(e);
+        let setMouseMove = e => this.mousemove(e);
+        let setHitBall = e => this.hitBall(e);
 
-        console.log(`ball dropped: ${this.ballDropped}`);
         if (this.game.currentHoleNum === 1) {
-            window.addEventListener("mousemove", a);
-            window.addEventListener("click", b);
+            window.addEventListener("mousemove", setMouseMove);
+            window.addEventListener("click", setHitBall);
         } else {
-            window.removeEventListener("mousemove", a);
-            window.removeEventListener("click", b);
-            window.addEventListener("mousemove", a);
-            window.addEventListener("click", b);
+            window.removeEventListener("mousemove", setMouseMove);
+            window.removeEventListener("click", setHitBall);
+            window.addEventListener("mousemove", setMouseMove);
+            window.addEventListener("click", setHitBall);
         }
     }
 
@@ -225,13 +217,13 @@ class Hole {
 
     strokeMessage() {
         if (this.strokes === 1) {
-            return "Hole in one!!! <br> Excellent Shot!";
+            return "Hole in one!!! <br> Excellent Shot! 🥳";
         } else if (this.par - this.strokes === 1) {
-            return "You got a birdie!!!";
+            return "You got a birdie!!! 🤩";
         } else if (this.par - this.strokes === 2) {
             return "Wow!!! Eagle!!!";
         } else if (this.par === this.strokes) {
-            return "Solid par!";
+            return "Par 😏";
         } else if (this.strokes - this.par === 1) {
             return "Bogey 😢";
         } else if (this.strokes > this.par + 1) {

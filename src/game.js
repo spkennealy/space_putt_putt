@@ -49,7 +49,6 @@ class Game {
         newGame.forEach(button => {
             button.onclick = e => {
                 setTimeout(() => {
-                    // console.log("Clicked");
                     welcomeMessage.style.display = "none";
                     howToPlayMessage.style.display = "none";
                     e.stopPropagation();
@@ -87,12 +86,10 @@ class Game {
         // console.log(`This is the velocity: ${vel}`);
         this.currentHole.golfBall.isMoving = true;
         this.currentHole.golfBall.vel = vel;
-        // this.currentHole.strokes += 1;
         this.totalStrokes += 1;
     }
     
     getClickPostion(e) {
-        // debugger;
         let mouseX = e.pageX - this.canvas.offsetLeft;
         // console.log(`This is the click position X value: ${mouseX}`);
         let mouseY = e.pageY - this.canvas.offsetTop;
@@ -109,6 +106,7 @@ class Game {
             this,
             holes[this.currentHoleNum - 1]
         );      
+        console.log(`Current Hole: ${this.currentHoleNum}`);
     }
 
     showHoleNum() {
@@ -121,7 +119,6 @@ class Game {
             this.currentHoleNum += 1;
             const sunkMessage = document.getElementById("sink-message-container");
             sunkMessage.style.display = "none";
-            console.log(`Current Hole: ${this.currentHoleNum}`);
             this.start();
         }
     }
