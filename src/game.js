@@ -143,10 +143,26 @@ class Game {
     gameOver() {
         this.currentHole = null;
         this.currentHoleNum = 0;
+        const sunkMessage = document.getElementById("sink-message-container");
+        sunkMessage.style.display = "none";
         const gameOverDisplay = document.getElementById("game-over");
         gameOverDisplay.style.display = "flex";
         const gameOverMessage = document.getElementById("game-over-message");
         gameOverMessage.innerHTML = this.gameOverMessage();
+        const resultScore = document.getElementById("result-score");
+        resultScore.innerHTML = this.calcScore();
+        const totalResultScore = document.getElementById("total-result-score");
+        totalResultScore.innerHTML = this.totalStrokes;
+    }
+
+    calcScore() {
+        if (this.totalStrokes > 26) {
+            return `+ ${this.totalStrokes - 26}`;
+        } else if (this.totalStrokes < 26) {
+            return `- ${26 - this.totalStrokes}`;
+        } else {
+            return "E";
+        }
     }
 
     gameOverMessage() {
@@ -155,13 +171,13 @@ class Game {
         } else if (26 > this.totalStrokes && this.totalStrokes > 22) {
             return "Under par! Great job!";
         } else if (22 >= this.totalStrokes && this.totalStrokes > 19) {
-            return "Excellent 9 holes! You're a champ!";
+            return "Excellent 9 holes! <br> You're a champ!";
         } else if (19 >= this.totalStrokes) {
             return "What a game! <br> You might be the best space <br> putt putter out there!";
         } else if (26 < this.totalStrokes && this.totalStrokes <= 29) {
-            return "So close to par, you'll get there.";
+            return "So close to par, <br> you'll get there.";
         } else if (30 < this.totalStrokes && this.totalStrokes <= 34) {
-            return "At least you played under bogey golf...";
+            return "At least you played <br> under bogey golf...";
         } else {
             return "Rough game... try again";
         }

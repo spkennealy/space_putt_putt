@@ -82,10 +82,6 @@ th, td {
     outline: 0;
 }
 
-/* #next-hole {
-    margin-top: 20px;
-} */
-
 #nav-new-game, #next-hole, #instructions-in-nav {
     width: 80%;
     font-size: 17px;
@@ -108,7 +104,7 @@ th, td {
     color: white;
 }
 
-.hole-scorecard h4, .scorecard {
+.hole-scorecard h4, .scorecard, .final-score {
     margin: 0;
     padding: 0;
     text-align: center;
@@ -219,7 +215,7 @@ th, td {
     background: whitesmoke;
     color: black;
     box-shadow: 0 0 10px whitesmoke;
-    border-radius: 100px;
+    border-radius: 80px;
     margin-top: 30px;
 }
 
@@ -239,4 +235,17 @@ th, td {
     width: 220px;
     margin: 0 auto;
     font-size: 35px;
+}
+
+.final-score-tr th, .final-score-tr td {
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#final-score {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    width: 281px;
+    background: gainsboro;
 }
