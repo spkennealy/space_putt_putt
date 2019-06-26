@@ -150,15 +150,22 @@ class GolfBall {
     }
 
     decelerate() {
-        let rate = 1.0008;
+        let rate = 1.03;
         let xVel = this.vel[0];
         let yVel = this.vel[1];
 
         // console.log(`This is xVel: ${xVel}`);
         // console.log(`This is yVel: ${yVel}`);
-        if (xVel.abs >  8 || yVel.abs > 8) {
-            rate = 1.02;
+        if ((xVel > 3.5 && xVel <= 8) || (yVel > 3.5 && yVel <= 8) || 
+            (xVel < -3.5 && xVel >= -8) || (yVel < -3.5 && yVel >= -8)) {
+            rate = 1.035;
+        } else if (xVel > 8 || yVel > 8 || xVel < -8 || yVel < -8) {
+            rate = 1.04;
+        } else if ((xVel > 0 && xVel <= 3.5) || (yVel > 0 && yVel <= 3.5) ||
+            (xVel < 0 && xVel >= -3.5) || (yVel < 0 && yVel >= 3.5)) {
+            rate = 1.05;
         }
+        // console.log(`This is the rate: ${rate}`);
 
         if (xVel !== 0 || yVel !== 0) {
 
