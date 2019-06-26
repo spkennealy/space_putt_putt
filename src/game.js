@@ -123,6 +123,11 @@ class Game {
         }
     }
 
+    setHoleScore(score) {
+        let currHoleScorecard = document.getElementById(`score-${this.currentHoleNum}`);
+        currHoleScorecard.innerHTML = score;
+    }
+
 }
 
 export default Game;
