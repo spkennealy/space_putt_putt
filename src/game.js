@@ -51,9 +51,15 @@ class Game {
                 setTimeout(() => {
                     welcomeMessage.style.display = "none";
                     howToPlayMessage.style.display = "none";
+                    const sunkMessage = document.getElementById("sink-message-container");
+                    sunkMessage.style.display = "none";
                     e.stopPropagation();
                     this.currentHoleNum = 1;
                     this.totalStrokes = 0;
+                    const eachHoleScorecard = document.querySelectorAll(".scorecard-data");
+                    eachHoleScorecard.forEach(scorecard => {
+                        scorecard.innerHTML = "";
+                    });
                     this.start();
                 }, 200);
             };
