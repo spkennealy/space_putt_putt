@@ -39,7 +39,8 @@ th, td {
 }
 
 .links {
-    background: transparent;
+    /* background: transparent; */
+    background: linear-gradient(to top left, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); 
     width: 200px;
     height: 100px;
     margin: 10px 50px 10px 0;
@@ -61,8 +62,9 @@ th, td {
     text-transform: uppercase;
     font-weight: bold;
     transition: 0.3s;
-    border: 2px solid gray;
+    border: 2px solid white;
     outline: 0;
+    font-size: 16px;
 }
 
 .buttons:hover {
@@ -89,7 +91,8 @@ th, td {
 }
 
 .hole-scorecard {
-    background: transparent;;
+    /* background: transparent; */
+    background: linear-gradient(to top right, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0) 100%); 
     width: 200px;
     height: 100px;
     margin: 10px 0;
@@ -125,6 +128,7 @@ th, td {
 .scorecard-table {
     box-shadow: 0 0 10px whitesmoke;
     margin-bottom: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%); 
 }
 
 .scorecard h4 {
@@ -144,6 +148,7 @@ th, td {
     background: whitesmoke;
     color: black;
     box-shadow: 0 0 10px whitesmoke;
+    border-radius: 100px;
 }
 
 #welcome-message h4 {
