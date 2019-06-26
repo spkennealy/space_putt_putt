@@ -227,6 +227,8 @@ class Hole {
             return "Par 😏";
         } else if (this.strokes - this.par === 1) {
             return "Bogey 😢";
+        } else if (this.strokes - this.par === 2) {
+            return "Double Bogey 😩";
         } else if (this.strokes > this.par + 1) {
             return "Ouch, rough hole 😭";
         }
