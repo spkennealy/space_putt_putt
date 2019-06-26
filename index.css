@@ -50,7 +50,7 @@ th, td {
     box-shadow: 0 0 10px whitesmoke;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -82,11 +82,11 @@ th, td {
     outline: 0;
 }
 
-#next-hole {
+/* #next-hole {
     margin-top: 20px;
-}
+} */
 
-#nav-new-game, #next-hole {
+#nav-new-game, #next-hole, #instructions-in-nav {
     width: 80%;
     font-size: 17px;
 }
@@ -172,8 +172,8 @@ th, td {
     background: whitesmoke;
     color: black;
     width: 550px;
-    padding: 20px;
-    margin-top: 15px;
+    padding: 0px 20px 20px 20px;
+    margin-top: 30px;
     box-shadow: 0 0 10px whitesmoke;
 }
 

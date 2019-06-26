@@ -79,6 +79,8 @@ class Game {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.currentHole.draw();
         this.showHoleNum();
+        const totalScore = document.getElementById("total-score");
+        totalScore.innerHTML = this.totalStrokes;
         requestAnimationFrame(this.animate.bind(this));
     }
 
