@@ -209,3 +209,34 @@ th, td {
     text-align: center;
     font-family: 'Monoton', cursive;
 }
+
+#game-over {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    color: black;
+    box-shadow: 0 0 10px whitesmoke;
+    border-radius: 100px;
+    margin-top: 30px;
+}
+
+#game-over h4 {
+    font-family: 'Monoton', cursive;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px;
+}
+
+#game-over header {
+    display: flex;
+    flex-direction: column;
+}
+
+#game-over-new-game {
+    width: 220px;
+    margin: 0 auto;
+    font-size: 35px;
+}

@@ -18,6 +18,8 @@ class Game {
         this.hit = this.hit.bind(this);
         this.newGame = this.newGame.bind(this);
         this.start = this.start.bind(this);
+        this.gameOver = this.gameOver.bind(this);
+        this.gameOverMessage = this.gameOverMessage.bind(this);
     }
 
     newGame() {
@@ -27,6 +29,7 @@ class Game {
         const howToPlayMessage = document.getElementById("instructions");
         const instructionsBack = document.getElementById("instructions-back");
         const nextHole = document.getElementById("next-hole");
+        const gameOverDisplay = document.getElementById("game-over");
 
         nextHole.onclick = e => {
             this.nextHole();
@@ -51,6 +54,7 @@ class Game {
                 setTimeout(() => {
                     welcomeMessage.style.display = "none";
                     howToPlayMessage.style.display = "none";
+                    gameOverDisplay.style.display = "none";
                     const sunkMessage = document.getElementById("sink-message-container");
                     sunkMessage.style.display = "none";
                     e.stopPropagation();
@@ -134,6 +138,33 @@ class Game {
     setHoleScore(score) {
         let currHoleScorecard = document.getElementById(`score-${this.currentHoleNum}`);
         currHoleScorecard.innerHTML = score;
+    }
+
+    gameOver() {
+        this.currentHole = null;
+        this.currentHoleNum = 0;
+        const gameOverDisplay = document.getElementById("game-over");
+        gameOverDisplay.style.display = "flex";
+        const gameOverMessage = document.getElementById("game-over-message");
+        gameOverMessage.innerHTML = this.gameOverMessage();
+    }
+
+    gameOverMessage() {
+        if (this.totalStrokes === 26) {
+            return "Par golf, good job.";
+        } else if (26 > this.totalStrokes && this.totalStrokes > 22) {
+            return "Under par! Great job!";
+        } else if (22 >= this.totalStrokes && this.totalStrokes > 19) {
+            return "Excellent 9 holes! You're a champ!";
+        } else if (19 >= this.totalStrokes) {
+            return "What a game! <br> You might be the best space <br> putt putter out there!";
+        } else if (26 < this.totalStrokes && this.totalStrokes <= 29) {
+            return "So close to par, you'll get there.";
+        } else if (30 < this.totalStrokes && this.totalStrokes <= 34) {
+            return "At least you played under bogey golf...";
+        } else {
+            return "Rough game... try again";
+        }
     }
 
 }

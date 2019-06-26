@@ -212,6 +212,11 @@ class Hole {
                     sunkMessage.style.display = "flex";
                     sunkMessageText.innerHTML = this.strokeMessage();
                 }, 500);
+
+                if (this.game.currentHoleNum === 9) {
+                    setTimeout(() => this.game.gameOver(), 1500);
+                    return;
+                }
             }
         }
     }
