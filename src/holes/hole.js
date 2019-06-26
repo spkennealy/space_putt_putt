@@ -43,7 +43,7 @@ class Hole {
         this.drawHole(this.ctx, this.holePos);
         this.drawMat();
         this.drawWalls();
-        this.drawTriangle();
+        // this.drawTriangle();
         this.showStrokes();
 
         if (!this.golfBall.sunk) {

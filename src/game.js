@@ -11,7 +11,7 @@ class Game {
         this.totalStrokes = 0;
 
         this.newGame();
-
+        
         this.getClickPostion = this.getClickPostion.bind(this);
         this.newHole = this.newHole.bind(this);
         this.showHoleNum = this.showHoleNum.bind(this);
@@ -19,7 +19,7 @@ class Game {
         this.newGame = this.newGame.bind(this);
         this.start = this.start.bind(this);
         this.gameOver = this.gameOver.bind(this);
-        this.gameOverMessage = this.gameOverMessage.bind(this);
+        this.gameOverMessage = this.gameOverMessage.bind(this);   
     }
 
     newGame() {
@@ -68,6 +68,8 @@ class Game {
                 }, 200);
             };
         });
+
+        this.animate();
     }
 
     start() {
@@ -76,12 +78,11 @@ class Game {
         }
         if (this.currentHoleNum > 9) return false;
         this.newHole();
-        this.animate();
     }
 
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.currentHole.draw();
+        if (this.currentHole) this.currentHole.draw();
         this.showHoleNum();
         const totalScore = document.getElementById("total-score");
         totalScore.innerHTML = this.totalStrokes;
