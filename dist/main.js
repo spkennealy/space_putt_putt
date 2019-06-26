@@ -214,7 +214,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n\n\n/* harmony default export
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// TODO: Edit coordinate\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    holePos: [100, 70],\n    walls: [\n        [0, 140, 600, 20],\n        [200, 340, 600, 20],\n        [150, 40, 20, 60]\n    ],\n    triangles: [[]],\n    trianglesColor: \"rgb(128, 128, 128, 0.6)\",\n    wallColor: \"rgb(128, 128, 128, 0.6)\",\n    golfBallColor: \"#0000FF\",\n    matPos: [720, 375, 50, 100],\n    ballPos: [745, 425],\n    par: 3\n});\n\n//# sourceURL=webpack:///./src/holes/hole_7.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    holePos: [70, 430],\n    walls: [\n        [140, 50, 50, 450],\n        [350, 50, 300, 300]\n    ],\n    triangles: [[]],\n    trianglesColor: \"rgb(128, 128, 128, 0.6)\",\n    wallColor: \"rgb(128, 128, 128, 0.6)\",\n    golfBallColor: \"#0000FF\",\n    matPos: [720, 200, 50, 100],\n    ballPos: [745, 250],\n    par: 3\n});\n\n//# sourceURL=webpack:///./src/holes/hole_7.js?");
 
 /***/ }),
 
