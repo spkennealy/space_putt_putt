@@ -1,17 +1,18 @@
-// TODO: Edit coordinate
+
 
 export default {
-    holePos: [100, 70],
+    holePos: [700, 70],
     walls: [
-        [0, 140, 600, 20],
-        [200, 340, 600, 20],
-        [150, 40, 20, 60]
+        [0, 0, 300, 100],
+        [380, 120, 40, 380],
+        [500, 0, 100, 130],
+        [560, 300, 65, 20]
     ],
     triangles: [[]],
     trianglesColor: "rgb(128, 128, 128, 0.6)",
     wallColor: "rgb(128, 128, 128, 0.6)",
     golfBallColor: "#0000FF",
-    matPos: [720, 375, 50, 100],
-    ballPos: [745, 425],
+    matPos: [40, 375, 50, 100],
+    ballPos: [65, 425],
     par: 3
 };
