@@ -16,6 +16,7 @@ class GolfBall {
         this.holdBall = this.holdBall.bind(this);
         this.draw = this.draw.bind(this);
         this.boundaryCollision = this.boundaryCollision.bind(this);
+        this.playCollisionSound = this.playCollisionSound.bind(this);
     }
     
     draw(ctx) {
@@ -89,8 +90,10 @@ class GolfBall {
         // if so, change the x velocity or y velocity to its inverse
         if (checkTopWall || checkBottomWall) {
             this.vel[1] = -this.vel[1];
+            this.playCollisionSound();
         } else if (checkLeftWall || checkRightWall) {
             this.vel[0] = -this.vel[0];
+            this.playCollisionSound();
         }
     }
 
@@ -115,8 +118,10 @@ class GolfBall {
             if (checkWallWidth && checkWallHeight) {
                 if (checkVerticalDirection) {
                     this.vel[1] = -this.vel[1];
+                    this.playCollisionSound();
                 } else {
                     this.vel[0] = -this.vel[0];
+                    this.playCollisionSound();
                 }
             }
         }
@@ -142,11 +147,21 @@ class GolfBall {
             if (checkWallWidth && checkWallHeight) {
                 if (checkVerticalDirection) {
                     this.vel[1] = -this.vel[1];
+                    this.playCollisionSound();
                 } else {
                     this.vel[0] = -this.vel[0];
+                    this.playCollisionSound();
                 }
             }
         });
+    }
+
+    playCollisionSound() {
+        const collisionSound = document.getElementById("collision-sound");
+        collisionSound.src = "sounds/wall_impact.mp3";
+        collisionSound.pause();
+        collisionSound.currentTime = 0;
+        collisionSound.play();
     }
 
     decelerate() {
