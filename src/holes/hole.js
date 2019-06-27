@@ -207,6 +207,12 @@ class Hole {
             if (checkVelocity === true) {
                 this.golfBall.sunk = true;
                 this.game.setHoleScore(this.strokes);
+
+                const sunkSound = document.getElementById("sink-sound");
+                sunkSound.src = "sounds/sink_ball.mp3";
+                sunkSound.pause();
+                sunkSound.currentTime = 0;
+                sunkSound.play();
                 
                 setTimeout(() => {
                     const sunkMessage = document.getElementById("sink-message-container");
