@@ -100,6 +100,12 @@ class Game {
         this.currentHole.golfBall.isMoving = true;
         this.currentHole.golfBall.vel = vel;
         this.totalStrokes += 1;
+
+        const hitSound = document.getElementById("hit-sound");
+        hitSound.src = "sounds/ball_hit.mp3";
+        hitSound.pause();
+        hitSound.currentTime = 0;
+        hitSound.play();
     }
     
     getClickPostion(e) {
