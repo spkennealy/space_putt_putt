@@ -205,6 +205,7 @@ class Hole {
             // console.log(`Golfball vel: ${this.golfBall.vel}`);
             // console.log(`Is ${this.golfBall.vel[0]} less than 7: ${Math.abs(this.golfBall.vel[0]) < 7 ? "true" : "false"}`);
             if (checkVelocity === true) {
+                debugger;
                 this.golfBall.sunk = true;
                 this.game.setHoleScore(this.strokes);
 
@@ -221,7 +222,7 @@ class Hole {
                     sunkMessageText.innerHTML = this.strokeMessage();
                 }, 500);
 
-                if (this.game.currentHoleNum === 9) {
+                if (this.game.currentHoleNum >= this.game.totalHoles) {
                     setTimeout(() => this.game.gameOver(), 1500);
                     return;
                 }

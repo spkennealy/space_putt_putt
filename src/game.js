@@ -1,6 +1,6 @@
 import { Util } from './util';
 import Hole from "./holes/hole";
-import holes from './holes/all_holes';
+import holes from './holes/course_1'; // have selectCourse() chose the holes
 
 class Game {
     constructor(ctx, canvas) {
@@ -9,6 +9,8 @@ class Game {
         this.currentHole = null;
         this.currentHoleNum = 0;
         this.totalStrokes = 0;
+        this.totalHoles = holes.length;
+        this.course = null;
 
         this.newGame();
         
@@ -21,6 +23,10 @@ class Game {
         this.gameOver = this.gameOver.bind(this);
         this.gameOverMessage = this.gameOverMessage.bind(this);   
     }
+
+    // selectCourse() {
+
+    // }
 
     newGame() {
         const newGame = document.querySelectorAll(".new-game");
@@ -58,7 +64,7 @@ class Game {
                     const sunkMessage = document.getElementById("sink-message-container");
                     sunkMessage.style.display = "none";
                     e.stopPropagation();
-                    this.currentHoleNum = 1;
+                    this.currentHoleNum = 10;
                     this.totalStrokes = 0;
                     const eachHoleScorecard = document.querySelectorAll(".scorecard-data");
                     eachHoleScorecard.forEach(scorecard => {
@@ -76,7 +82,7 @@ class Game {
         if (this.currentHoleNum === 0) {
             this.currentHoleNum += 1;
         }
-        if (this.currentHoleNum > 9) return false;
+        if (this.currentHoleNum > holes.length + 1) return false;
         this.newHole();
     }
 
@@ -189,6 +195,8 @@ class Game {
             return "Rough game... try again";
         }
     }
+
+    
 
 }
 
