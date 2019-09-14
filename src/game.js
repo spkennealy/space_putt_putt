@@ -1,6 +1,6 @@
 import { Util } from './util';
 import Hole from "./holes/hole";
-import holes from './holes/course_1'; // have selectCourse() chose the holes
+import holes from './holes/course_1/course_1'; // have selectCourse() chose the holes
 
 class Game {
     constructor(ctx, canvas) {
@@ -82,7 +82,7 @@ class Game {
         if (this.currentHoleNum === 0) {
             this.currentHoleNum += 1;
         }
-        if (this.currentHoleNum > holes.length + 1) return false;
+        if (this.currentHoleNum > holes.length) return false;
         this.newHole();
     }
 
