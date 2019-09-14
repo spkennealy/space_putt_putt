@@ -64,12 +64,13 @@ class Game {
                     const sunkMessage = document.getElementById("sink-message-container");
                     sunkMessage.style.display = "none";
                     e.stopPropagation();
-                    this.currentHoleNum = 10;
+                    this.currentHoleNum = 1;
                     this.totalStrokes = 0;
                     const eachHoleScorecard = document.querySelectorAll(".scorecard-data");
                     eachHoleScorecard.forEach(scorecard => {
                         scorecard.innerHTML = "";
                     });
+                    this.setHolePars();
                     this.start();
                 }, 200);
             };
@@ -196,8 +197,12 @@ class Game {
         }
     }
 
-    
-
+    setHolePars() {
+        holes.forEach((hole, i) => {
+            let holeParEle = document.getElementById(`par-${i + 1}`);
+            holeParEle.innerHTML = hole.par;
+        });
+    }
 }
 
 export default Game;
