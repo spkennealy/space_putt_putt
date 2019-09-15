@@ -34,74 +34,76 @@
         </div>
     </nav>
 
-    <div id="welcome-message">
-        <header>
-            <h4>Welcome to <br>
-                Space Putt Putt</h4>
-        </header>
-        <nav class="welcome-message-buttons">
-            <button class="buttons new-game">New Game</button>
-            <button class="buttons" id="instruction">How to Play</button>
-        </nav>
-    </div>
+    <div class="canvas-and-messages">
+        <div id="welcome-message">
+            <header>
+                <h4>Welcome to <br>
+                    Space Putt Putt</h4>
+            </header>
+            <nav class="welcome-message-buttons">
+                <button class="buttons new-game">New Game</button>
+                <button class="buttons" id="instruction">How to Play</button>
+            </nav>
+        </div>
 
-    <div id="instructions">
-        <header>
-            <h4>How to Play:</h4>
-            <p>
-                Click "New Game" to start. The first hole will start and you will 
-                see a ball on a blue mat, like below.
-                <br>
-                <br>
-                <img src="images/mat.png" id="mat-screenshot">
-                <br>
-                Click anywhere on the mat to drop the ball where you want it to be
-                placed. Once you have dropped the ball, your mouse becomes the putter
-                and an arrow will appear in the opposite direction from where your
-                mouse is. Use the arrow to determine the speed and angle at which
-                the ball will be hit.
-                <br>
-                <br>
-                Once you have determined the direction and speed at which you want
-                the ball to go, click again to hit the ball.
-                <br>
-                <br>
-                Continue this until you have sunk the ball in the hole! Good luck!
-            </p>
-        </header>
-        <nav>
-            <button class="buttons new-game">New Game</button>
-            <button class="buttons" id="instructions-back">Back</button>
-        </nav>
-    </div>
+        <div id="instructions">
+            <header>
+                <h4>How to Play:</h4>
+                <p>
+                    Click "New Game" to start. The first hole will start and you will 
+                    see a ball on a blue mat, like below.
+                    <br>
+                    <br>
+                    <img src="images/mat.png" id="mat-screenshot">
+                    <br>
+                    Click anywhere on the mat to drop the ball where you want it to be
+                    placed. Once you have dropped the ball, your mouse becomes the putter
+                    and an arrow will appear in the opposite direction from where your
+                    mouse is. Use the arrow to determine the speed and angle at which
+                    the ball will be hit.
+                    <br>
+                    <br>
+                    Once you have determined the direction and speed at which you want
+                    the ball to go, click again to hit the ball.
+                    <br>
+                    <br>
+                    Continue this until you have sunk the ball in the hole! Good luck!
+                </p>
+            </header>
+            <nav>
+                <button class="buttons new-game">New Game</button>
+                <button class="buttons" id="instructions-back">Back</button>
+            </nav>
+        </div>
 
-    <div id="sink-message-container">
-        <h4 id="sink-message"></h4>
-    </div>
+        <div id="sink-message-container">
+            <h4 id="sink-message"></h4>
+        </div>
 
-    <div id="game-over">
-        <header>
-            <h4 id="game-over-message"></h4>
-            <button class="buttons new-game" id="game-over-new-game">New Game</button>
-        </header>
-        <table border="1" id="final-score">
-            <tr class="final-score-tr">
-                <th>Results</th>
-                <th>Score</th>
-                <th>Par</th>
-            </tr>
-            <tr class="final-score-tr">
-                <td id="result-score"></td>
-                <td id="total-result-score"></td>
-                <td>26</td>
-            </tr>
-        </table>
-    </div>
+        <div id="game-over">
+            <header>
+                <h4 id="game-over-message"></h4>
+                <button class="buttons new-game" id="game-over-new-game">New Game</button>
+            </header>
+            <table border="1" id="final-score">
+                <tr class="final-score-tr">
+                    <th>Results</th>
+                    <th>Score</th>
+                    <th>Par</th>
+                </tr>
+                <tr class="final-score-tr">
+                    <td id="result-score"></td>
+                    <td id="total-result-score"></td>
+                    <td>26</td>
+                </tr>
+            </table>
+        </div>
 
-    <div id="canvas-wrapper">
-        <canvas id="canvas"></canvas>
+        <div id="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+        </div>
+        <script src="dist/main.js"></script>
     </div>
-    <script src="dist/main.js"></script>
 
     <footer>
         <div class="scorecard">
@@ -135,7 +137,6 @@
                 </tr>
                 <tr>
                     <td id="par">Par</td>
-                     <!-- Eventually change this to dynamically updating based on course -->
                     <td id="par-1"></td>
                     <td id="par-2"></td>
                     <td id="par-3"></td>
@@ -145,8 +146,10 @@
                     <td id="par-7"></td>
                     <td id="par-8"></td>
                     <td id="par-9"></td>
-                    <td id="total-par">26</td>
+                    <td id="total-par"></td>
                 </tr>
+            </table>
+            <table border="1" class="scorecard-table">
                 <tr>
                     <th>Holes</th>
                     <th>10</th>
