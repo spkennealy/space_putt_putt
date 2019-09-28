@@ -64,7 +64,7 @@ class Game {
                     const sunkMessage = document.getElementById("sink-message-container");
                     sunkMessage.style.display = "none";
                     e.stopPropagation();
-                    this.currentHoleNum = 1;
+                    this.currentHoleNum = 11;
                     this.totalStrokes = 0;
                     const eachHoleScorecard = document.querySelectorAll(".scorecard-data");
                     eachHoleScorecard.forEach(scorecard => {
