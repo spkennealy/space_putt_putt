@@ -9,6 +9,7 @@ import hole8 from './hole_8';
 import hole9 from './hole_9';
 import hole10 from './hole_10';
 import hole11 from './hole_11';
+import hole12 from './hole_12';
 
 export default [
     hole1,
@@ -21,5 +22,6 @@ export default [
     hole8,
     hole9,
     hole10,
-    hole11
+    hole11,
+    hole12
 ];
