@@ -178,7 +178,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n\n\n/* harmony default export
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    holePos: [50, 50],\n    walls: [\n        [600, 100, 300, 20],\n    ],\n    triangles: [[]],\n    trianglesColor: \"rgb(128, 128, 128, 0.6)\",\n    wallColor: \"rgb(128, 128, 128, 0.6)\",\n    golfBallColor: \"#0000FF\",\n    matPos: [350, 420, 100, 50],\n    ballPos: [400, 450],\n    par: 3\n});\n\n//# sourceURL=webpack:///./src/holes/course_1/hole_13.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n    holePos: [50, 50],\n    walls: [\n        [400, 100, 500, 20],\n        [400, 200, 500, 20],\n        [400, 300, 500, 20],\n        [0, 150, 500, 20],\n        [0, 250, 500, 20],\n        [0, 350, 500, 20],\n        // [400, 100, 500, 20],\n        // [400, 100, 500, 20],\n        // [400, 100, 500, 20],\n        // [400, 100, 500, 20],\n        // [400, 100, 500, 20],\n    ],\n    triangles: [[]],\n    trianglesColor: \"rgb(128, 128, 128, 0.6)\",\n    wallColor: \"rgb(128, 128, 128, 0.6)\",\n    golfBallColor: \"#0000FF\",\n    matPos: [350, 420, 100, 50],\n    ballPos: [400, 450],\n    par: 6\n});\n\n//# sourceURL=webpack:///./src/holes/course_1/hole_13.js?");
 
 /***/ }),
 
