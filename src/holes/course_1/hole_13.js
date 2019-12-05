@@ -3,7 +3,7 @@
 export default {
     holePos: [50, 50],
     walls: [
-        [100, 100, 300, 20],
+        [600, 100, 300, 20],
     ],
     triangles: [[]],
     trianglesColor: "rgb(128, 128, 128, 0.6)",
